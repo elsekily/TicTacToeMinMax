@@ -1,53 +1,50 @@
-// See https://aka.ms/new-console-template for more information
 class TicTacToeGame
 {
+    private IXODrawer drawer;
     private char[,] array = new char[3, 3];
     private char computerChar = 'o';
     private char playerChar = 'x';
     private char emptyChar = ' ';
-    public TicTacToeGame()
+    public TicTacToeGame(IXODrawer drawer)
     {
+        this.drawer = drawer;
         PopulateArray();
-        Drawer();
+        StartGame();
+    }
+    private void StartGame()
+    {
+        drawer.Draw(array);
         var stateWinOrDraw = false;
         while (!stateWinOrDraw)
         {
-            var input = ((int)Console.ReadKey().KeyChar) - 49;
-            if (!PlayerTurn(input))
+            if (PlayerTurn(drawer.GetInput()))
             {
-                System.Console.WriteLine("input valid pos press ENTER to try again!");
-                Console.ReadKey();
-            }
-            else
-            {
-                Drawer();
+                drawer.Draw(array);
                 if (CheckWin(playerChar))
                 {
-                    System.Console.WriteLine("player Win!");
+                    drawer.DeclareWinner(true);
                     stateWinOrDraw = true;
                     continue;
                 }
                 if (CheckDraw())
                 {
                     stateWinOrDraw = true;
-                    System.Console.WriteLine("DRAW!");
+                    drawer.DeclareDraw();
                     continue;
                 }
                 else
                 {
                     ComputerTurn();
-                    Drawer();
-                    if (CheckWin('o'))
+                    drawer.Draw(array);
+                    if (CheckWin(computerChar))
                     {
                         stateWinOrDraw = true;
-                        System.Console.WriteLine("computer WIn");
+                        drawer.DeclareWinner(false);
                     }
                 }
             }
         }
-        Console.ReadKey();
-        Console.Clear();
-        Console.SetCursorPosition(0, 0);
+
     }
     private class Move
     {
@@ -139,25 +136,15 @@ class TicTacToeGame
         }
         return score.Max();
     }
-    private bool PlayerTurn(int input)
+    private bool PlayerTurn(int[] input)
     {
-        for (int i = 0; i < array.GetLength(0); i++)
+        if (array[input[0], input[1]] == emptyChar)
         {
-            for (int j = 0; j < array.GetLength(1); j++)
-            {
-                if (input == 0 && array[i, j] == emptyChar)
-                {
-                    array[i, j] = playerChar;
-                    return true;
-                }
-                else if (input == 0 && array[i, j] != emptyChar)
-                {
-                    return false;
-                }
-                input--;
-            }
+            array[input[0], input[1]] = playerChar;
+            return true;
         }
-        return false;
+        else
+            return false;
     }
     private void PopulateArray()
     {
@@ -208,28 +195,5 @@ class TicTacToeGame
                 return true;
         }
         return false;
-    }
-    private void Drawer()
-    {
-
-        Console.Clear();
-        Console.SetCursorPosition(0, 0);
-        System.Console.Write("----------");
-        for (int i = 0; i < array.GetLength(0); i++)
-        {
-            System.Console.Write("\n|");
-            for (int j = 0; j < array.GetLength(1); j++)
-            {
-                Console.Write(" {0}|", array[i, j]);
-            }
-            if (i == array.GetLength(0) - 1)
-            {
-                System.Console.Write("\n----------");
-
-            }
-            else
-                System.Console.Write("\n|--------|");
-
-        }
     }
 }
