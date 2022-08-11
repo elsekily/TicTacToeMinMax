@@ -1,13 +1,13 @@
-class TicTacToeGame
+class Game
 {
-    private IXODrawer drawer;
-    private TicTacToeChecker checker;
+    private IDrawer drawer;
+    private Checker checker;
     private Minmax computer;
     private char[,] array = new char[3, 3];
-    public TicTacToeGame(IXODrawer drawer)
+    public Game(IDrawer drawer)
     {
         this.drawer = drawer;
-        checker = new TicTacToeChecker();
+        checker = new Checker();
         computer = new Minmax(checker);
         PopulateArray();
         StartGame();
@@ -21,13 +21,13 @@ class TicTacToeGame
             if (PlayerTurn(drawer.GetInput()))
             {
                 drawer.Draw(array);
-                if (checker.CheckWin(Characters.PlayerChar, array))
+                if (checker.IsWin(Characters.PlayerChar, array))
                 {
                     drawer.DeclareWinner(true);
                     stateWinOrDraw = true;
                     continue;
                 }
-                if (checker.CheckDraw(array))
+                if (checker.IsDraw(array))
                 {
                     stateWinOrDraw = true;
                     drawer.DeclareDraw();
@@ -37,7 +37,7 @@ class TicTacToeGame
                 {
                     computer.Play(array);
                     drawer.Draw(array);
-                    if (checker.CheckWin(Characters.ComputerChar, array))
+                    if (checker.IsWin(Characters.ComputerChar, array))
                     {
                         stateWinOrDraw = true;
                         drawer.DeclareWinner(false);
@@ -45,7 +45,6 @@ class TicTacToeGame
                 }
             }
         }
-
     }
     private bool PlayerTurn(int[] input)
     {

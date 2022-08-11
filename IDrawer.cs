@@ -1,4 +1,4 @@
-interface IXODrawer
+interface IDrawer
 {
     void Draw(char[,] array);
     void DeclareWinner(bool playerOrComputer);

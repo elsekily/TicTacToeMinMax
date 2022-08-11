@@ -1,8 +1,8 @@
 using System;
 class Minmax
 {
-    private TicTacToeChecker checker;
-    public Minmax(TicTacToeChecker checker)
+    private Checker checker;
+    public Minmax(Checker checker)
     {
         this.checker = checker;
     }
@@ -22,7 +22,7 @@ class Minmax
                 if (array[i, j] == Characters.EmptyChar)
                 {
                     array[i, j] = Characters.ComputerChar;
-                    if (checker.CheckWin(Characters.ComputerChar, array))
+                    if (checker.IsWin(Characters.ComputerChar, array))
                         return;
 
                     moves.Add(new Move() { I = i, J = j, Score = CheckAllPossibleMoves(true, array) });
@@ -43,18 +43,18 @@ class Minmax
                 if (array[i, j] == Characters.EmptyChar)
                 {
                     array[i, j] = playerTurn ? Characters.PlayerChar : Characters.ComputerChar;
-                    if (checker.CheckWin(Characters.PlayerChar, array))
+                    if (checker.IsWin(Characters.PlayerChar, array))
                     {
                         array[i, j] = Characters.EmptyChar;
                         return -1;
                     }
-                    else if (checker.CheckWin(Characters.ComputerChar, array))
+                    else if (checker.IsWin(Characters.ComputerChar, array))
                     {
                         array[i, j] = Characters.EmptyChar;
                         return 1;
                     }
 
-                    else if (checker.CheckDraw(array))
+                    else if (checker.IsDraw(array))
                     {
                         array[i, j] = Characters.EmptyChar;
                         return 0;

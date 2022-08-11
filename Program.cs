@@ -1,5 +1,5 @@
 ﻿while (true)
 {
-    var drawer = new XOConsoleDrawer();
-    var x = new TicTacToeGame(drawer);
+    var drawer = new ConsoleDrawer();
+    var x = new Game(drawer);
 }

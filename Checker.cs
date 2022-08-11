@@ -1,6 +1,6 @@
-class TicTacToeChecker
+class Checker
 {
-    public bool CheckDraw(char[,] array)
+    public bool IsDraw(char[,] array)
     {
         for (int i = 0; i < array.GetLength(0); i++)
         {
@@ -12,7 +12,7 @@ class TicTacToeChecker
         }
         return true;
     }
-    public bool CheckWin(char playerChar, char[,] array)
+    public bool IsWin(char playerChar, char[,] array)
     {
         return CheckDiagonals(playerChar, array) || CheckColumns(playerChar, array) || CheckRows(playerChar, array);
     }

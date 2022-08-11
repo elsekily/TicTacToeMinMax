@@ -1,7 +1,7 @@
-public class XOConsoleDrawer : IXODrawer
+public class ConsoleDrawer : IDrawer
 {
     private int arrayLength;
-    public XOConsoleDrawer(int arrayLength = 3)
+    public ConsoleDrawer(int arrayLength = 3)
     {
         this.arrayLength = 3;
     }
