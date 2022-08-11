@@ -2,13 +2,13 @@ class Game
 {
     private IDrawer drawer;
     private Checker checker;
-    private Minmax computer;
+    private Minimax computer;
     private char[,] array = new char[3, 3];
     public Game(IDrawer drawer)
     {
         this.drawer = drawer;
         checker = new Checker();
-        computer = new Minmax(checker);
+        computer = new Minimax(checker);
         PopulateArray();
         StartGame();
     }
