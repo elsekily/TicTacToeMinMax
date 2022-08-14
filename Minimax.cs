@@ -22,6 +22,9 @@ class Minimax
                 if (array[i, j] == Characters.EmptyChar)
                 {
                     array[i, j] = Characters.ComputerChar;
+                    if (checker.IsWin(Characters.ComputerChar, array))
+                        return;
+
                     moves.Add(new Move() { I = i, J = j, Score = CheckAllPossibleMoves(true, array) });
                     array[i, j] = Characters.EmptyChar;
                 }
