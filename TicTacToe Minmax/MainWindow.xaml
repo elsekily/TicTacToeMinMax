@@ -1,0 +1,39 @@
+﻿<Window x:Class="TicTacToe_Minmax.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TicTacToe_Minmax"
+        mc:Ignorable="d"
+        Title="Tic-Tac-Toe" Height="400" Width="500" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Scoreboard for Computer -->
+        <TextBlock x:Name="ComputerScoreTextBlock" Grid.Row="0" HorizontalAlignment="Center" FontSize="18" Margin="0,10,0,0" />
+
+        <!-- Scoreboard for Human -->
+        <TextBlock x:Name="HumanScoreTextBlock" Grid.Row="1" HorizontalAlignment="Center" FontSize="18" Margin="0,10,0,0" />
+
+        <!-- Tic-Tac-Toe Grid -->
+        <UniformGrid Grid.Row="2" Rows="3" Columns="3">
+            <Button x:Name="Button0" Tag="0" Content="" Click="Button_Click"/>
+            <Button x:Name="Button1" Tag="1" Content="" Click="Button_Click"/>
+            <Button x:Name="Button2" Tag="2" Content="" Click="Button_Click"/>
+            <Button x:Name="Button3" Tag="3" Content="" Click="Button_Click"/>
+            <Button x:Name="Button4" Tag="4" Content="" Click="Button_Click"/>
+            <Button x:Name="Button5" Tag="5" Content="" Click="Button_Click"/>
+            <Button x:Name="Button6" Tag="6" Content="" Click="Button_Click"/>
+            <Button x:Name="Button7" Tag="7" Content="" Click="Button_Click"/>
+            <Button x:Name="Button8" Tag="8" Content="" Click="Button_Click"/>
+        </UniformGrid>
+
+        <!-- Restart Button -->
+        <Button x:Name="RestartButton" Grid.Row="3" Click="RestartButton_Click" Content="Restart" HorizontalAlignment="Center" Margin="0,10" Padding="10,5" FontSize="16" />
+    </Grid>
+</Window>
